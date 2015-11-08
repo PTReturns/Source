@@ -24,10 +24,10 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Pre-Compiled Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -37,5 +37,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Change Log.h" />
   </ItemGroup>
 </Project>

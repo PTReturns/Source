@@ -16,6 +16,15 @@
     <Filter Include="Pre-Compiled Header Files">
       <UniqueIdentifier>{f9a754af-8790-4c9d-812e-6afc88a74241}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Exe Tables">
+      <UniqueIdentifier>{a93c2648-9d4c-4377-a431-7f98b39fc35b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exe Tables\Header Files">
+      <UniqueIdentifier>{61f68142-3ed8-4473-b73a-2d0d384b5309}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exe Tables\Source Files">
+      <UniqueIdentifier>{9eaa891c-29de-4364-abc0-773719b46583}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -25,6 +34,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Server.h" />
+    <ClInclude Include="Change Log.h" />
+    <ClInclude Include="ItemTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Server.cpp" />
@@ -35,6 +48,9 @@
       <Filter>Pre-Compiled Header Files</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
