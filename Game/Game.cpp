@@ -2,5 +2,5 @@
 
 void RAVELGAY( )
 {
-	int nada;
+
 }
