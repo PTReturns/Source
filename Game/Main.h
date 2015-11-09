@@ -3,7 +3,9 @@
 class CMain
 {
 public:
+	CMain( );
 
+	void Hook( );
 private:
 
 };

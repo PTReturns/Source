@@ -11,13 +11,10 @@
 #define SQL_USER "sa"
 #define SQL_PASS "123456"
 
-/* MUDAR: SE FOR O MATEUS COLOQUE // ATRAS DE #DEFINE */
-//#define CAINAN
-
-#ifdef CAINAN
-#undef SQL_INST
-#define SQL_INST "TPT\\SQLExpress"
-#endif
-
 // Total de mapas possíveis.
 #define MAX_TOTAL_FIELD 64
+
+// Configurações do level.
+#define LEVEL_CAP 120
+#define LEVEL_MULTIPLIER 1.125
+#define LEVEL_BASE 1000

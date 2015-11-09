@@ -16,6 +16,12 @@
     <Filter Include="Pre-Compiled Header Files">
       <UniqueIdentifier>{371dbd29-9ffd-4e8a-8389-2dca6bc1e725}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Exe Tables">
+      <UniqueIdentifier>{1c7b8d4b-0087-4217-8ce4-a2eecdc57678}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exe Tables\Level">
+      <UniqueIdentifier>{8f422d4c-9761-4d33-a4cf-08aa2ca37e49}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -28,6 +34,12 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NetworkPacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelTable.cpp">
+      <Filter>Exe Tables\Level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -37,6 +49,11 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Change Log.h" />
+    <ClInclude Include="NetworkPacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelTable.h">
+      <Filter>Exe Tables\Level</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

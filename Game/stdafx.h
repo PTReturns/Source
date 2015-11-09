@@ -8,3 +8,10 @@
 #include <cctype>
 #include <vector>
 #include "Game.h"
+
+#include "..\Exception.h"
+#include "..\OpCode.h"
+#include "..\Structs.h"
+
+extern void _WriteMemory( DWORD Address, DWORD Value, DWORD nBytes = 4 );
+#define WRITEMEMORY _WriteMemory

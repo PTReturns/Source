@@ -31,6 +31,9 @@
     <Filter Include="Exe Tables\Field">
       <UniqueIdentifier>{f3330544-6e55-4b49-88ce-3e170b8a68a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Exe Tables\Level">
+      <UniqueIdentifier>{5d5a6c4d-fc45-4568-b82f-1bbadc647669}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -40,7 +43,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Server.h" />
-    <ClInclude Include="Change Log.h" />
     <ClInclude Include="SQLApi.h">
       <Filter>Custom API%27s Files\SQL</Filter>
     </ClInclude>
@@ -51,6 +53,18 @@
       <Filter>Exe Tables\Field</Filter>
     </ClInclude>
     <ClInclude Include="NetworkPacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UserData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelTable.h">
+      <Filter>Exe Tables\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="ExpSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -75,6 +89,18 @@
       <Filter>Exe Tables\Field</Filter>
     </ClCompile>
     <ClCompile Include="NetworkPacket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UserData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelTable.cpp">
+      <Filter>Exe Tables\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="ExpSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

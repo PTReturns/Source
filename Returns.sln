@@ -7,6 +7,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Server", "Server\Server.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game\Game.vcxproj", "{F0A28DB2-7917-4B12-968E-60DA456B1AD7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared Files", "Shared Files", "{32859D8A-E235-4B1B-8197-9A3CA935341F}"
+	ProjectSection(SolutionItems) = preProject
+		Exception.h = Exception.h
+		OpCode.h = OpCode.h
+		Structs.h = Structs.h
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32

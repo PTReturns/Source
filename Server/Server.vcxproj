@@ -77,14 +77,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Change Log.h" />
+    <ClInclude Include="ExpSystem.h" />
     <ClInclude Include="FieldTable.h" />
     <ClInclude Include="ItemTable.h" />
+    <ClInclude Include="LevelTable.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="NetworkPacket.h" />
     <ClInclude Include="Server.h" />
     <ClInclude Include="SQLApi.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="UserData.h" />
+    <ClInclude Include="UserInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -95,8 +98,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="ExpSystem.cpp" />
     <ClCompile Include="FieldTable.cpp" />
     <ClCompile Include="ItemTable.cpp" />
+    <ClCompile Include="LevelTable.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="NetworkPacket.cpp" />
     <ClCompile Include="Server.cpp" />
@@ -105,6 +110,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="UserData.cpp" />
+    <ClCompile Include="UserInfo.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

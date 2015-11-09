@@ -9,5 +9,9 @@
 #include <vector>
 #include "Server.h"
 
+#include "..\Exception.h"
+#include "..\OpCode.h"
+#include "..\Structs.h"
+
 extern void _WriteMemory( DWORD Address, DWORD Value, DWORD nBytes = 4 );
 #define WRITEMEMORY _WriteMemory
