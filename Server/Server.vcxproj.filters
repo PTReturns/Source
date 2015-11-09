@@ -50,6 +50,9 @@
     <ClInclude Include="FieldTable.h">
       <Filter>Exe Tables\Field</Filter>
     </ClInclude>
+    <ClInclude Include="NetworkPacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Server.cpp" />
@@ -70,6 +73,9 @@
     </ClCompile>
     <ClCompile Include="FieldTable.cpp">
       <Filter>Exe Tables\Field</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkPacket.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
