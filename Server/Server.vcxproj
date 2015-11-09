@@ -81,6 +81,7 @@
     <ClInclude Include="FieldTable.h" />
     <ClInclude Include="ItemTable.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="NetworkPacket.h" />
     <ClInclude Include="Server.h" />
     <ClInclude Include="SQLApi.h" />
     <ClInclude Include="stdafx.h" />
@@ -97,6 +98,7 @@
     <ClCompile Include="FieldTable.cpp" />
     <ClCompile Include="ItemTable.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="NetworkPacket.cpp" />
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="SQLApi.cpp" />
     <ClCompile Include="stdafx.cpp">

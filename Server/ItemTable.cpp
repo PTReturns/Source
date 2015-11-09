@@ -1734,6 +1734,10 @@ void CItemTable::BuildItems( )
 
 void CItemTable::ReferenceItems( )
 {
+	WRITEMEMORY( 0x0054CA50 + 6, ITEM_QUANTITY );
+	WRITEMEMORY( 0x00558F12 + 1, ( ITEM_QUANTITY + 1 ) * 0xB48 );
+	WRITEMEMORY( 0x005594EB + 2, ( ITEM_QUANTITY + 1 ) );
+
 	WRITEMEMORY( 0x00415E17, m_ItemTable );
 	WRITEMEMORY( 0x00417090, m_ItemTable );
 	WRITEMEMORY( 0x0041E5F9, m_ItemTable );
