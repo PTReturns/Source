@@ -1,19 +1,21 @@
 #pragma once
 
-struct smItemTable
+class CItemTable
 {
-	int 	ID;
-	char	Name[ 32 ];
-	char	Code1[ 16 ];
-	int		Width;
-	int     Height;
-	char	FilePath[ 64 ];
-	int 	Class;
-	char    Code2[ 64 ];
-	int     InventoryPos;
-	int		SoundIndex;
-	int     WeaponClass;
-	char	InvalidParams[ 584 ];
+public:
+	CItemTable( );
+	void CreateItem( const int ID, const char* Code1, const char* Code2, const int Width,
+					 const int Height, const char* Folder, const int HoldMode, const int CityType,
+					 const int Sound, const int Range, const int Unknown );
+	void BuildItems( );
+	void ReferenceItems( );
+	int GetID( const char* Code );
+	const char* GetCode( int ID );
+
+private:
+	int m_ItemTable;
+	int m_ItemCount;
 };
 
-extern smItemTable Items[ ITEM_QUANTITY + 1 ];
+extern std::shared_ptr<CItemTable> pItemTable;
+#define ITEMTABLE pItemTable
