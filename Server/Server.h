@@ -12,7 +12,7 @@
 #define SQL_PASS "123456"
 
 /* MUDAR: SE FOR O MATEUS COLOQUE // ATRAS DE #DEFINE */
-#define CAINAN
+//#define CAINAN
 
 #ifdef CAINAN
 #undef SQL_INST
