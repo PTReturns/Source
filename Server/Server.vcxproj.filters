@@ -19,11 +19,17 @@
     <Filter Include="Exe Tables">
       <UniqueIdentifier>{a93c2648-9d4c-4377-a431-7f98b39fc35b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Exe Tables\Header Files">
-      <UniqueIdentifier>{61f68142-3ed8-4473-b73a-2d0d384b5309}</UniqueIdentifier>
+    <Filter Include="Custom API%27s Files">
+      <UniqueIdentifier>{7de33866-853d-484e-a653-dd8e823ed91e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Exe Tables\Source Files">
-      <UniqueIdentifier>{9eaa891c-29de-4364-abc0-773719b46583}</UniqueIdentifier>
+    <Filter Include="Custom API%27s Files\SQL">
+      <UniqueIdentifier>{6dc11333-65fa-44ce-ba5c-b5959e70bfd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exe Tables\Item">
+      <UniqueIdentifier>{40def4a4-8b98-464e-b0d2-7992a266265d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exe Tables\Field">
+      <UniqueIdentifier>{f3330544-6e55-4b49-88ce-3e170b8a68a2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -35,8 +41,14 @@
     </ClInclude>
     <ClInclude Include="Server.h" />
     <ClInclude Include="Change Log.h" />
+    <ClInclude Include="SQLApi.h">
+      <Filter>Custom API%27s Files\SQL</Filter>
+    </ClInclude>
     <ClInclude Include="ItemTable.h">
-      <Filter>Header Files</Filter>
+      <Filter>Exe Tables\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldTable.h">
+      <Filter>Exe Tables\Field</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -50,8 +62,14 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SQLApi.cpp">
+      <Filter>Custom API%27s Files\SQL</Filter>
+    </ClCompile>
     <ClCompile Include="ItemTable.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Exe Tables\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldTable.cpp">
+      <Filter>Exe Tables\Field</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
