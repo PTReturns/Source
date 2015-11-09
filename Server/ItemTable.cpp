@@ -26,9 +26,9 @@ void CItemTable::CreateItem( const int ID, const char* Code1, const char* Code2,
 	*( int* )( m_ItemTable + ( m_ItemCount * 0x314 ) + 0xC4 ) = Sound;
 	*( int* )( m_ItemTable + ( m_ItemCount * 0x314 ) + 0xC8 ) = Range;
 	*( char* )( m_ItemTable + ( m_ItemCount * 0x314 ) + 0x7D ) = ( char )Unknown;
-	strcpy_s( ( char* )( m_ItemTable + ( m_ItemCount * 0x314 ) + 0x24 ), 5, Code1 );
+	strcpy_s( ( char* )( m_ItemTable + ( m_ItemCount * 0x314 ) + 0x24 ), 6, Code1 );
 	strcpy_s( ( char* )( m_ItemTable + ( m_ItemCount * 0x314 ) + 0x3C ), 64, Folder );
-	strcpy_s( ( char* )( m_ItemTable + ( m_ItemCount * 0x314 ) + 0x80 ), 5, Code2 );
+	strcpy_s( ( char* )( m_ItemTable + ( m_ItemCount * 0x314 ) + 0x80 ), 6, Code2 );
 	m_ItemCount++;
 };
 
