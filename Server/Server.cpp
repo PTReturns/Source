@@ -7,6 +7,7 @@ void StartConsole( )
 	FILE* Console = nullptr;
 	AllocConsole( );
 	freopen_s( &Console, "CONOUT$", "w", stdout );
+	SetConsoleTitle( "Priston Tale - Returns" );
 }
 #endif
 
