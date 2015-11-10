@@ -8,5 +8,7 @@ namespace Code
 
 		WhisperMessage = 0x48471005,
 		Connection = 0x48470085,
+		AddSoloExp = 0x48470031,
+		AddPartyExp = 0x48470029,
 	};
 };

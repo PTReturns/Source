@@ -1,5 +1,7 @@
 #pragma once
 
+#define _DEBUG_MODE_
+
 /* VARIÁVEIS DO EXECUTÁVEL */
 #define PSTALE 0x08B67000
 

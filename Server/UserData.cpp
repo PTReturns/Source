@@ -129,12 +129,18 @@ void CUserData::SetPartyMasterData( int Data ) const
 	*( int* )( m_PlayInfo + 0xAFB0 ) = Data;
 }
 
-void CUserData::SetExpOut( int ExpOut ) const
-{
-	*( int* )( m_PlayInfo + 0xAF14 ) = ExpOut;
-}
-
 void CUserData::SetPrivilege( int PrivilegeLevel )
 {
 	*( int * )( m_PlayInfo + 0x6E1C ) = PrivilegeLevel;
+}
+
+void CUserData::DeleteParty( )
+{
+	SetPartyState( PARTY_STATE_NONE );
+	SetPartyMasterData( NULL );
+}
+
+void CUserData::AddTotalExp( int Exp )
+{
+	*( int* )( m_PlayInfo + 0xAF14 ) += Exp;
 }

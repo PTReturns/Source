@@ -34,6 +34,21 @@
     <Filter Include="Exe Tables\Level">
       <UniqueIdentifier>{5d5a6c4d-fc45-4568-b82f-1bbadc647669}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{485a36a3-0ea7-42a3-9b1b-c47f29373066}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\Exp">
+      <UniqueIdentifier>{12b4a040-40d0-4f01-bb1d-f4e61427dd72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataBases">
+      <UniqueIdentifier>{1dd784e0-fa22-4e14-b1a5-39dce7c8db3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataBases\User">
+      <UniqueIdentifier>{37f8ab90-82f7-480d-a6d6-1b1ffe73e774}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataBases\Monster">
+      <UniqueIdentifier>{aa3df8e7-6d46-4cd3-9d42-ee5d5f850a82}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -55,17 +70,20 @@
     <ClInclude Include="NetworkPacket.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UserData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UserInfo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="LevelTable.h">
       <Filter>Exe Tables\Level</Filter>
     </ClInclude>
     <ClInclude Include="ExpSystem.h">
-      <Filter>Header Files</Filter>
+      <Filter>Systems\Exp</Filter>
+    </ClInclude>
+    <ClInclude Include="UserData.h">
+      <Filter>DataBases\User</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInfo.h">
+      <Filter>DataBases\User</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterData.h">
+      <Filter>DataBases\Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -91,17 +109,20 @@
     <ClCompile Include="NetworkPacket.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UserData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UserInfo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LevelTable.cpp">
       <Filter>Exe Tables\Level</Filter>
     </ClCompile>
     <ClCompile Include="ExpSystem.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Systems\Exp</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterData.cpp">
+      <Filter>DataBases\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="UserData.cpp">
+      <Filter>DataBases\User</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInfo.cpp">
+      <Filter>DataBases\User</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

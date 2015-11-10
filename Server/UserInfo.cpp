@@ -19,7 +19,7 @@ bool CUserInfo::DeAllocUser( const int PlayInfo )
 	{
 		if( User )
 		{
-			if( User->GetPlayInfo( ) == PlayInfo )
+			if( User->GetInfo( ) == PlayInfo )
 			{
 				delete User;
 				pUsers.erase( pUsers.begin( ) + i );
@@ -38,7 +38,7 @@ CUserData* CUserInfo::GetData( const int PlayInfo )
 	{
 		if( User )
 		{
-			if( User->GetPlayInfo( ) == PlayInfo )
+			if( User->GetInfo( ) == PlayInfo )
 				return User;
 		}
 	};
