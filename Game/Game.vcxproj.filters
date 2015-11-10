@@ -22,6 +22,21 @@
     <Filter Include="Exe Tables\Level">
       <UniqueIdentifier>{8f422d4c-9761-4d33-a4cf-08aa2ca37e49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{32271c73-8853-48f9-a462-24fa56a5d351}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\Exp">
+      <UniqueIdentifier>{eb8b2118-a079-401d-9336-fdc671e93d4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataBases">
+      <UniqueIdentifier>{409ed942-c60d-4916-9d94-e699ce371b2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataBases\Monster">
+      <UniqueIdentifier>{517f76f7-7e7b-4d99-8af0-9c2318262201}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataBases\User">
+      <UniqueIdentifier>{a83baee0-1caa-4aed-94c5-fa6c99300e4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -40,6 +55,15 @@
     <ClCompile Include="LevelTable.cpp">
       <Filter>Exe Tables\Level</Filter>
     </ClCompile>
+    <ClCompile Include="ExpSystem.cpp">
+      <Filter>Systems\Exp</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterData.cpp">
+      <Filter>DataBases\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="UserData.cpp">
+      <Filter>DataBases\User</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -54,6 +78,15 @@
     </ClInclude>
     <ClInclude Include="LevelTable.h">
       <Filter>Exe Tables\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="ExpSystem.h">
+      <Filter>Systems\Exp</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterData.h">
+      <Filter>DataBases\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="UserData.h">
+      <Filter>DataBases\User</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

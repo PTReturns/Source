@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "NetworkPacket.h"
 #include "LevelTable.h"
+#include "ExpSystem.h"
 
 CNetworkPacket::CNetworkPacket( smPacket* Packet )
 {
@@ -18,6 +19,15 @@ bool CNetworkPacket::VerifyPacket( )
 														   GameTable.Multiplier,
 														   GameTable.Base );
 				delete pGameLevel;
+			}
+			return true;
+		case Code::AddSoloExp:
+		case Code::AddPartyExp:
+			{
+				smEarnExp &Exp = *( smEarnExp* )m_Packet;
+				CExpSystem* pExp = new CExpSystem( &Exp );
+				pExp->System( );
+				delete pExp;
 			}
 			return true;
 	};

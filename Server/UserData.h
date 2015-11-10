@@ -38,7 +38,7 @@ public:
 
 	int GetLevel( ) const;
 	int GetSocket( ) const;
-	int GetPlayInfo( ) const { return m_PlayInfo; };
+	int GetInfo( ) const { return m_PlayInfo; };
 	int GetField( ) const;
 	int GetPartyState( ) const;
 	int GetPartyMasterData( ) const;
@@ -59,8 +59,9 @@ public:
 	void PutItem( int ItemID ) const;
 	void SetPartyState( int State ) const;
 	void SetPartyMasterData( int Data ) const;
-	void SetExpOut( int ExpOut ) const;
 	void SetPrivilege( int PrivilegeLevel );
+	void DeleteParty( );
+	void AddTotalExp( int Exp );
 private:
 	int m_PlayInfo;
 

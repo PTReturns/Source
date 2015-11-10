@@ -1,5 +1,7 @@
 #pragma once
 
+typedef double DOUBLE;
+
 struct smPacket
 {
 	DWORD Size;
@@ -23,4 +25,15 @@ struct smLevelTable
 	DWORD Cap;
 	FLOAT Multiplier;
 	DWORD Base;
+};
+
+struct smEarnExp
+{
+	DWORD Size;
+	DWORD Code;
+	DWORD MonInfo;
+	DWORD MemberCount;
+	DWORD Divisor;
+	INT64 Exp;
+	DOUBLE CheckSum;
 };
