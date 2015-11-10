@@ -20,29 +20,33 @@ bool CExpSystem::is2BIError( int Exp )
 	int Level = m_UserData->GetLevel( );
 	if( Level >= 100 )
 	{
-		if( Exp > 0 && Exp < 31250000 )
+		if( Exp >= 0 && Exp < 31250000 )
 			return false;
 	}
 	else if( Level >= 75 )
 	{
-		if( Exp > 0 && Exp < 6250000 )
+		if( Exp >= 0 && Exp < 6250000 )
 			return false;
 	}
 	else if( Level >= 50 )
 	{
-		if( Exp > 0 && Exp < 1250000 )
+		if( Exp >= 0 && Exp < 1250000 )
 			return false;
 	}
 	else if( Level >= 25 )
 	{
-		if( Exp > 0 && Exp < 250000 )
+		if( Exp >= 0 && Exp < 250000 )
 			return false;
 	}
 	else if( Level < 25 )
 	{
-		if( Exp > 0 && Exp < 50000 )
+		if( Exp >= 0 && Exp < 50000 )
 			return false;
 	}
+
+#ifdef _DEBUG_MODE_
+	std::cout << m_UserData->GetNick( ) << ": 2BIError[ " << Exp << " ]." << std::endl;
+#endif
 
 	return true;
 }
@@ -81,6 +85,11 @@ void CExpSystem::GetSoloExp( )
 	//
 
 	m_UserData->SendInt( &Experience );
+
+#ifdef _DEBUG_MODE_
+	std::cout << m_UserData->GetNick( ) << ": Solo EXP Earned[ " << Experience.Exp << " ]." << std::endl;
+#endif
+
 }
 
 void CExpSystem::GetPartyExp( )
@@ -140,6 +149,10 @@ void CExpSystem::GetPartyExp( )
 			{
 				Member->AddTotalExp( ( int )MemberExp );
 				Member->SendInt( &Experience );
+
+#ifdef _DEBUG_MODE_
+				std::cout << Member->GetNick( ) << ": Party EXP Earned[ " << MemberExp << " ]." << std::endl;
+#endif
 			};
 		};
 	};
@@ -148,6 +161,10 @@ void CExpSystem::GetPartyExp( )
 	Experience.CheckSum = ( double )( ( Experience.MonInfo / 3 ) ^ Experience.Code +
 									  ( ( Experience.Exp ^ 0x6B2E9F7D8A5C8F9E ) / 5 ) + Experience.MemberCount );
 	m_UserData->SendInt( &Experience );
+
+#ifdef _DEBUG_MODE_
+	std::cout << m_UserData->GetNick( ) << ": Party EXP Earned[ " << LeaderExp << " ]." << std::endl;
+#endif
 }
 
 INT64 CExpSystem::GetRealExp( INT64 Exp, int LevelVariation )

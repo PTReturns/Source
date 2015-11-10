@@ -7,6 +7,7 @@
 #include <memory>
 #include <cctype>
 #include <vector>
+#include <iostream>
 #include "Server.h"
 
 #include "..\Exception.h"
