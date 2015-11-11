@@ -80,9 +80,9 @@ void CExpSystem::GetSoloExp( )
 	// TODO: POTIONS
 	if( m_UserData->m_ExpBoost )
 	{
-		double BoostPercent = ( double )( m_UserData->m_ExpBoost / 100.00 ) + 1.00;
+		INT64 AddExp = ( Experience.Exp * m_UserData->m_ExpBoost ) / 100;
 
-		Experience.Exp *= ( INT64 )BoostPercent;
+		Experience.Exp += AddExp;
 	};
 	//
 
@@ -149,9 +149,9 @@ void CExpSystem::GetPartyExp( )
 	// TODO: POTIONS
 	if( m_UserData->m_ExpBoost )
 	{
-		double BoostPercent = ( double )( m_UserData->m_ExpBoost / 100.00 ) + 1.00;
+		INT64 AddExp = ( Experience.Exp * m_UserData->m_ExpBoost ) / 100;
 
-		LeaderExp *= ( INT64 )BoostPercent;
+		Experience.Exp += AddExp;
 	};
 	//
 
