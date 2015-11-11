@@ -22,7 +22,7 @@ void CPremium::System( )
 						DWORD ExpireTime = CURRENT_TIME + ( 1 * DAY );
 						if( SQL->Execute( "INSERT INTO ServerDB.dbo.Premiuns "
 										  "VALUES( '%s', '%s', %d, %d, %d, %d )",
-										  m_User->GetID( ), m_User->GetNick( ), m_User->GetID( ), m_User->GetNick( ),
+										  m_User->GetID( ), m_User->GetNick( ), 
 										  m_Premium->ItemCode, CURRENT_TIME, ExpireTime, (1 * DAY ) ) )
 						{
 							m_User->m_ExpBoost += EXPUP_POTION_30;
