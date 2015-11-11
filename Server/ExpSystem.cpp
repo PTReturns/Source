@@ -76,6 +76,10 @@ void CExpSystem::GetSoloExp( )
 	Experience.MonInfo = m_MonsterData->GetInfo( );
 	Experience.MemberCount = 1;
 	Experience.Exp = GetRealExp( m_MonsterData->GetExp( ), m_MonsterData->GetLevel( ) - m_UserData->GetLevel( ) );
+	m_UserData->AddTotalExp( ( int )Experience.Exp );
+	Experience.OldChecks[ 0 ] = ( int )Experience.Exp;
+	Experience.OldChecks[ 1 ] = ( ( int )Experience.Exp * 3 + Experience.MonInfo * 13 ) * 2002;
+	Experience.OldChecks[ 2 ] = Experience.OldChecks[ 1 ] ^ m_UserData->GetExpOut( );
 
 	Experience.CheckSum = ( double )( ( Experience.MonInfo / 3 ) ^ Experience.Code +
 									  ( ( Experience.Exp ^ 0x6B2E9F7D8A5C8F9E ) / 5 ) + Experience.MemberCount );
@@ -84,6 +88,7 @@ void CExpSystem::GetSoloExp( )
 
 	//
 
+	Experience.Divisor = m_Divisor;
 	m_UserData->SendInt( &Experience );
 
 #ifdef _DEBUG_MODE_
@@ -123,10 +128,10 @@ void CExpSystem::GetPartyExp( )
 	switch( Experience.MemberCount )
 	{
 		case 2: Exp *= 0.75; break;
-		case 3: Exp *= 0.60; break;
-		case 4: Exp *= 0.52; break;
-		case 5: Exp *= 0.47; break;
-		case 6: Exp *= 0.44; break;
+		case 3: Exp *= 0.57; break;
+		case 4: Exp *= 0.47; break;
+		case 5: Exp *= 0.42; break;
+		case 6: Exp *= 0.38; break;
 	};
 
 	Experience.Exp = ( INT64 )Exp;
@@ -141,6 +146,11 @@ void CExpSystem::GetPartyExp( )
 	Experience.Exp = MemberExp;
 	Experience.CheckSum = ( double )( ( Experience.MonInfo / 3 ) ^ Experience.Code +
 									  ( ( Experience.Exp ^ 0x6B2E9F7D8A5C8F9E ) / 5 ) + Experience.MemberCount );
+
+	Experience.OldChecks[ 0 ] = ( int )MemberExp;
+	Experience.OldChecks[ 1 ] = ( ( int )MemberExp * 3 + Experience.MonInfo * 13 ) * 2002;
+	Experience.Divisor = m_Divisor;
+
 	for( auto &Member : Members )
 	{
 		if( Member )
@@ -148,6 +158,9 @@ void CExpSystem::GetPartyExp( )
 			if( Member->GetInfo( ) != m_UserData->GetInfo( ) )
 			{
 				Member->AddTotalExp( ( int )MemberExp );
+
+				Experience.OldChecks[ 2 ] = Experience.OldChecks[ 1 ] ^ Member->GetExpOut( );
+
 				Member->SendInt( &Experience );
 
 #ifdef _DEBUG_MODE_
@@ -157,9 +170,16 @@ void CExpSystem::GetPartyExp( )
 		};
 	};
 
+	m_UserData->AddTotalExp( ( int )LeaderExp );
+
 	Experience.Exp = LeaderExp;
 	Experience.CheckSum = ( double )( ( Experience.MonInfo / 3 ) ^ Experience.Code +
 									  ( ( Experience.Exp ^ 0x6B2E9F7D8A5C8F9E ) / 5 ) + Experience.MemberCount );
+
+	Experience.OldChecks[ 0 ] = ( int )LeaderExp;
+	Experience.OldChecks[ 1 ] = ( ( int )LeaderExp * 3 + Experience.MonInfo * 13 ) * 2002;
+	Experience.OldChecks[ 2 ] = Experience.OldChecks[ 1 ] ^ m_UserData->GetExpOut( );
+
 	m_UserData->SendInt( &Experience );
 
 #ifdef _DEBUG_MODE_
@@ -174,24 +194,31 @@ INT64 CExpSystem::GetRealExp( INT64 Exp, int LevelVariation )
 
 	if( LevelVariation >= 50 )
 	{
+		m_Divisor = 0;
 		return 0;
 	}
 	else if( LevelVariation >= 40 )
 	{
+		m_Divisor = 25;
 		return ( INT64 )( Exp * 0.25 );
 	}
 	else if( LevelVariation >= 30 )
 	{
+		m_Divisor = 50;
 		return ( INT64 )( Exp * 0.50 );
 	}
 	else if( LevelVariation >= 20 )
 	{
+		m_Divisor = 75;
 		return ( INT64 )( Exp * 0.75 );
 	}
 	else if( LevelVariation < 20 )
 	{
+		m_Divisor = 100;
 		return ( INT64 )( Exp );
 	}
+
+	m_Divisor = 0;
 	return 0;
 }
 

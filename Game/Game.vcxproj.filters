@@ -64,6 +64,9 @@
     <ClCompile Include="UserData.cpp">
       <Filter>DataBases\User</Filter>
     </ClCompile>
+    <ClCompile Include="Translate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -87,6 +90,9 @@
     </ClInclude>
     <ClInclude Include="UserData.h">
       <Filter>DataBases\User</Filter>
+    </ClInclude>
+    <ClInclude Include="Translate.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

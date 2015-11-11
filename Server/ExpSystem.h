@@ -18,6 +18,7 @@ public:
 	INT64 GetRealExp( INT64 Exp, int LevelVariation );
 	bool GetDistance( CUserData* User );
 private:
+	int m_Divisor;
 	CUserData* m_UserData;
 	CMonsterData* m_MonsterData;
 };

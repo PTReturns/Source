@@ -15,6 +15,10 @@ void CFieldTable::BuildFields( )
 
 		int Address = 0x0075B038;
 		int nFieldAddr = 0x0075BE94;
+
+#ifdef _DEBUG_MODE_
+		std::cout << "Reading Maps[ " << nMaps << " ]..." << std::endl;
+#endif
 		for( int i = 0; i < nMaps; i++ )
 		{
 			*( int* )( nFieldAddr ) = atoi( Maps[ i ][ 0 ].c_str( ) );
@@ -25,8 +29,16 @@ void CFieldTable::BuildFields( )
 
 			Address += 0xEA8;
 			nFieldAddr += 0xEA8;
+
+#ifdef _DEBUG_MODE_
+			std::cout << "Map read[ " << Maps[ i ][ 2 ].c_str( ) << " ]..." << std::endl;
+#endif
 		};
 	};
+
+#ifdef _DEBUG_MODE_
+	std::cout << "All found maps are read." << std::endl;
+#endif
 }
 
 int CFieldTable::GetEnvironmentFromString( const char* String )

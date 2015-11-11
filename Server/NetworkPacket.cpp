@@ -11,7 +11,14 @@ CNetworkPacket::CNetworkPacket( const int PlayInfo, smPacket* Packet )
 bool CNetworkPacket::VerifyPacket( )
 {
 	if( !m_UserData && m_Packet->Code != Code::Connection )
+	{
 		m_UserData = USERS->AllocUser( m_PlayInfo );
+#ifdef _DEBUG_MODE_
+		std::cout << "Realocated[ 0x"
+			<< std::hex << std::uppercase << m_UserData->GetInfo( )
+			<< std::dec << std::nouppercase << " ]." << std::endl;
+#endif
+	};
 
 	switch( m_Packet->Code )
 	{
@@ -26,6 +33,14 @@ bool CNetworkPacket::VerifyPacket( )
 				Level.Base = LEVEL_BASE;
 				m_UserData = USERS->AllocUser( m_PlayInfo );
 				m_UserData->SendInt( &Level );
+
+				smUserInfo &User = *( smUserInfo* )m_Packet;
+
+#ifdef _DEBUG_MODE_
+				std::cout << User.ID << ": Allocated[ 0x"
+					<< std::hex << std::uppercase << m_UserData->GetInfo( )
+					<< std::dec << std::nouppercase << " ]." << std::endl;
+#endif
 			}
 			break;
 	};

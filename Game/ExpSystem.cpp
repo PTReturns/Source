@@ -22,7 +22,6 @@ void CExpSystem::System( )
 		if( m_Exp->CheckSum == ( double )( ( m_Exp->MonInfo / 3 ) ^ m_Exp->Code +
 			( ( m_Exp->Exp ^ 0x6B2E9F7D8A5C8F9E ) / 5 ) + m_Exp->MemberCount ) )
 		{
-
 			CMonsterData* MonsterData = new CMonsterData( MonsterInfo );
 			AddExp( m_Exp->Exp );
 			MonsterData->SetExp( ( int )m_Exp->Exp );
@@ -36,21 +35,25 @@ void CExpSystem::System( )
 			char Buffer[ 256 ] = { 0 };
 			if( m_Exp->Code == Code::AddPartyExp )
 			{
-				sprintf_s( Buffer, "" );
+				sprintf_s( Buffer, "> Ganhou: %s de Experiência[ %d%% ].", ExpText.c_str( ), m_Exp->Divisor );
 				AddChatMsg( Buffer, 9 );
-				// FESTA
+
+				CheckPartyQuest1( MonsterData->GetCode( ) );
+				CheckPartyQuest2( ( int* )0x035F36C0, MonsterData->GetCode( ) );
 			}
 			else
 			{
-				sprintf_s( Buffer, "> Ganhou: %s de Experiência[ Solo ]", ExpText.c_str( ) );
+				sprintf_s( Buffer, "> Ganhou: %s de Experiência[ %d%% ].", ExpText.c_str( ), m_Exp->Divisor );
 				AddChatMsg( Buffer, 9 );
-				// ALONE
+
+				CheckQuest1( MonsterData->GetCode( ) );
+				CheckQuest2( ( int* )0x035F36C0, MonsterData->GetCode( ) );
 			};
 			delete MonsterData;
 		}
 		else
 		{
-			// Seu boneco foi banido.
+			USER->SendHackLog( HackCode::Exp, ( int )m_Exp->Exp );
 		};
 	};
 }

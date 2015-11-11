@@ -32,8 +32,18 @@ struct smEarnExp
 	DWORD Size;
 	DWORD Code;
 	DWORD MonInfo;
+	DWORD OldChecks[ 3 ];
 	DWORD MemberCount;
 	DWORD Divisor;
 	INT64 Exp;
 	DOUBLE CheckSum;
+};
+
+struct smUserInfo
+{
+	DWORD Size;
+	DWORD Code;
+	DWORD Params[ 3 ];
+	CHAR  ID[ 32 ];
+	CHAR  Name[ 32 ];
 };
