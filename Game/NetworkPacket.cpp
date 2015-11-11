@@ -3,6 +3,13 @@
 #include "LevelTable.h"
 #include "ExpSystem.h"
 
+#include "Premium.h"
+
+//Premium Externals
+extern DWORD WINAPI CheckPremiuns( LPVOID Item );
+extern bool ThreadMode;
+//
+
 CNetworkPacket::CNetworkPacket( smPacket* Packet )
 {
 	m_Packet = Packet;
@@ -19,6 +26,23 @@ bool CNetworkPacket::VerifyPacket( )
 														   GameTable.Multiplier,
 														   GameTable.Base );
 				delete pGameLevel;
+			}
+			return true;
+		case Code::SendPremiumItem:
+			{
+				smExpireTime &PremiumItem = *( smExpireTime* )m_Packet;
+				if( !ThreadMode )
+				{
+					DWORD tID = 0;
+					CreateThread( NULL, NULL, CheckPremiuns, ( LPVOID )&PremiumItem, NULL, &tID );
+					ThreadMode = true;
+				}
+				else
+				{
+					CPremium* pPremium = new CPremium( );
+					pPremium->AddItem( &PremiumItem );
+					delete pPremium;
+				};
 			}
 			return true;
 		case Code::AddSoloExp:

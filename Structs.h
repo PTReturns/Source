@@ -62,6 +62,6 @@ struct smExpireTime
 {
 	DWORD Size;
 	DWORD Code;
-	DWORD ExpireTime;
-
+	DWORD ItemCode;
+	DWORD TotalSeconds;
 };

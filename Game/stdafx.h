@@ -7,6 +7,7 @@
 #include <memory>
 #include <cctype>
 #include <vector>
+#include <iostream>
 #include "Game.h"
 
 #include "..\Exception.h"

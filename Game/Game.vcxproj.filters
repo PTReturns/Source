@@ -37,6 +37,9 @@
     <Filter Include="DataBases\User">
       <UniqueIdentifier>{a83baee0-1caa-4aed-94c5-fa6c99300e4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems\Premiuns">
+      <UniqueIdentifier>{7b52713b-5e4a-46e0-a676-f5b985a0224e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -67,6 +70,9 @@
     <ClCompile Include="Translate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Premium.cpp">
+      <Filter>Systems\Premiuns</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -93,6 +99,9 @@
     </ClInclude>
     <ClInclude Include="Translate.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Premium.h">
+      <Filter>Systems\Premiuns</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -17,7 +17,7 @@ namespace ItemCode
 {
 	enum
 	{
-		ExpUp = 0x080B0D00,
+		ExpUp1M = 0x080B0D00,
 	};
 };
 
