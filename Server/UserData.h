@@ -62,6 +62,10 @@ public:
 	void SetPrivilege( int PrivilegeLevel );
 	void DeleteParty( );
 	void AddTotalExp( int Exp );
+
+	// Premium
+	int m_ExpBoost;
+
 private:
 	int m_PlayInfo;
 

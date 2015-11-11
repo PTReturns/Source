@@ -47,3 +47,21 @@ struct smUserInfo
 	CHAR  ID[ 32 ];
 	CHAR  Name[ 32 ];
 };
+
+struct smThrowItem2
+{
+	DWORD Size;
+	DWORD Code;
+	DWORD Head;
+	DWORD ItemCode;
+	DWORD ItemCheckSum;
+	DWORD PremiumCheckSum;
+};
+
+struct smExpireTime
+{
+	DWORD Size;
+	DWORD Code;
+	DWORD ExpireTime;
+
+};

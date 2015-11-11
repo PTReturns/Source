@@ -49,6 +49,9 @@
     <Filter Include="DataBases\Monster">
       <UniqueIdentifier>{aa3df8e7-6d46-4cd3-9d42-ee5d5f850a82}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems\Premiuns">
+      <UniqueIdentifier>{ce38a4b5-7e1e-4f73-93a5-d198c517157a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -84,6 +87,9 @@
     </ClInclude>
     <ClInclude Include="MonsterData.h">
       <Filter>DataBases\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Premium.h">
+      <Filter>Systems\Premiuns</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +129,9 @@
     </ClCompile>
     <ClCompile Include="UserInfo.cpp">
       <Filter>DataBases\User</Filter>
+    </ClCompile>
+    <ClCompile Include="Premium.cpp">
+      <Filter>Systems\Premiuns</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

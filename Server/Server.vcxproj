@@ -84,6 +84,7 @@
     <ClInclude Include="Main.h" />
     <ClInclude Include="MonsterData.h" />
     <ClInclude Include="NetworkPacket.h" />
+    <ClInclude Include="Premium.h" />
     <ClInclude Include="Server.h" />
     <ClInclude Include="SQLApi.h" />
     <ClInclude Include="stdafx.h" />
@@ -106,6 +107,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MonsterData.cpp" />
     <ClCompile Include="NetworkPacket.cpp" />
+    <ClCompile Include="Premium.cpp" />
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="SQLApi.cpp" />
     <ClCompile Include="stdafx.cpp">

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "NetworkPacket.h"
+#include "Premium.h"
 
 CNetworkPacket::CNetworkPacket( const int PlayInfo, smPacket* Packet )
 {
@@ -41,6 +42,14 @@ bool CNetworkPacket::VerifyPacket( )
 					<< std::hex << std::uppercase << m_UserData->GetInfo( )
 					<< std::dec << std::nouppercase << " ]." << std::endl;
 #endif
+			}
+			break;
+		case Code::SaveThrowItem2:
+			{
+				smThrowItem2 &PremiumItem = *( smThrowItem2* )m_Packet;
+				CPremium* pPremium = new CPremium( &PremiumItem, m_UserData );
+				pPremium->System( );
+				delete pPremium;
 			}
 			break;
 	};

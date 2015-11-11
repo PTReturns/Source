@@ -85,7 +85,12 @@ void CExpSystem::GetSoloExp( )
 									  ( ( Experience.Exp ^ 0x6B2E9F7D8A5C8F9E ) / 5 ) + Experience.MemberCount );
 
 	// TODO: POTIONS
+	if( m_UserData->m_ExpBoost )
+	{
+		double BoostPercent = ( double )( m_UserData->m_ExpBoost / 100.00 ) + 1.00;
 
+		Experience.Exp *= BoostPercent;
+	};
 	//
 
 	Experience.Divisor = m_Divisor;
@@ -140,7 +145,12 @@ void CExpSystem::GetPartyExp( )
 	INT64 MemberExp = Experience.Exp;
 
 	// TODO: POTIONS
+	if( m_UserData->m_ExpBoost )
+	{
+		double BoostPercent = ( double )( m_UserData->m_ExpBoost / 100.00 ) + 1.00;
 
+		LeaderExp *= BoostPercent;
+	};
 	//
 
 	Experience.Exp = MemberExp;
