@@ -76,6 +76,16 @@ void CExpSystem::GetSoloExp( )
 	Experience.MonInfo = m_MonsterData->GetInfo( );
 	Experience.MemberCount = 1;
 	Experience.Exp = GetRealExp( m_MonsterData->GetExp( ), m_MonsterData->GetLevel( ) - m_UserData->GetLevel( ) );
+
+	// TODO: POTIONS
+	if( m_UserData->m_ExpBoost )
+	{
+		double BoostPercent = ( double )( m_UserData->m_ExpBoost / 100.00 ) + 1.00;
+
+		Experience.Exp *= ( INT64 )BoostPercent;
+	};
+	//
+
 	m_UserData->AddTotalExp( ( int )Experience.Exp );
 	Experience.OldChecks[ 0 ] = ( int )Experience.Exp;
 	Experience.OldChecks[ 1 ] = ( ( int )Experience.Exp * 3 + Experience.MonInfo * 13 ) * 2002;
@@ -84,14 +94,6 @@ void CExpSystem::GetSoloExp( )
 	Experience.CheckSum = ( double )( ( Experience.MonInfo / 3 ) ^ Experience.Code +
 									  ( ( Experience.Exp ^ 0x6B2E9F7D8A5C8F9E ) / 5 ) + Experience.MemberCount );
 
-	// TODO: POTIONS
-	if( m_UserData->m_ExpBoost )
-	{
-		double BoostPercent = ( double )( m_UserData->m_ExpBoost / 100.00 ) + 1.00;
-
-		Experience.Exp *= BoostPercent;
-	};
-	//
 
 	Experience.Divisor = m_Divisor;
 	m_UserData->SendInt( &Experience );
@@ -149,7 +151,7 @@ void CExpSystem::GetPartyExp( )
 	{
 		double BoostPercent = ( double )( m_UserData->m_ExpBoost / 100.00 ) + 1.00;
 
-		LeaderExp *= BoostPercent;
+		LeaderExp *= ( INT64 )BoostPercent;
 	};
 	//
 
