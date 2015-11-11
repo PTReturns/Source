@@ -32,6 +32,8 @@ void CPremium::System( )
 							PremiumItem.Code = Code::SendPremiumItem;
 							PremiumItem.ItemCode = m_Premium->ItemCode;
 							PremiumItem.TotalSeconds = ( 1 * MINUTE );
+
+							m_User->SendInt( &PremiumItem );
 						};
 					}
 					break;

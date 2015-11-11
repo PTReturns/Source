@@ -4,15 +4,18 @@
 std::shared_ptr<CPremium> pPremium = std::make_shared<CPremium>( );
 std::vector<smExpireTime*> PremiumItems;
 
-bool ThreadMode = false;
+bool TimerCount = false;
 
 void CPremium::AddItem( smExpireTime* PremiumItem )
 {
-	PremiumItems.push_back( PremiumItem );
+	smExpireTime* Premium = new smExpireTime( );
+	memcpy_s( Premium, sizeof( smExpireTime ), PremiumItem, sizeof( smExpireTime ) );
+
+	PremiumItems.push_back( Premium );
 
 #ifdef _DEBUG_MODE_
 	std::cout << "Item: 0x"
-		<< std::hex << std::uppercase << PremiumItem->ItemCode << std::nouppercase << std::dec
+		<< std::hex << std::uppercase << Premium->ItemCode << std::nouppercase << std::dec
 		<< " added on TimerCount." << std::endl;
 #endif
 }
@@ -24,6 +27,11 @@ void CPremium::UpdateItems( )
 		if( Item )
 		{
 			Item->TotalSeconds--;
+#ifdef _DEBUG_MODE_
+			std::cout << "Item: 0x"
+				<< std::hex << std::uppercase << Item->ItemCode << std::nouppercase << std::dec
+				<< " [ " << Item->TotalSeconds << " ]." << std::endl;
+#endif
 		};
 	};
 }
@@ -51,29 +59,8 @@ void CPremium::CheckTimes( )
 	};
 }
 
-DWORD WINAPI CheckPremiuns( LPVOID Item )
+void __stdcall CheckPremiums( HWND hWnd, UINT Message, UINT_PTR ID, DWORD Time )
 {
-	DWORD CurrentTime = CURRENT_TIME;
-	DWORD Time = CurrentTime;
-	ThreadMode = true;
-
-	if( Item )
-		pPremium->AddItem( ( smExpireTime* )Item );
-
-	while( true )
-	{
-		if( CurrentTime != CURRENT_TIME )
-		{
-			CurrentTime = CURRENT_TIME;
-
-			pPremium->UpdateItems( );
-		};
-
-		if( Time + 60 <= CurrentTime )
-		{
-			pPremium->CheckTimes( );
-		};
-	};
-
-	return 0;
-}
+	pPremium->UpdateItems( );
+	pPremium->CheckTimes( );
+};

@@ -6,8 +6,8 @@
 #include "Premium.h"
 
 //Premium Externals
-extern DWORD WINAPI CheckPremiuns( LPVOID Item );
-extern bool ThreadMode;
+extern void __stdcall CheckPremiums( HWND hWnd, UINT Message, UINT_PTR ID, DWORD Time );
+extern bool TimerCount;
 //
 
 CNetworkPacket::CNetworkPacket( smPacket* Packet )
@@ -31,18 +31,14 @@ bool CNetworkPacket::VerifyPacket( )
 		case Code::SendPremiumItem:
 			{
 				smExpireTime &PremiumItem = *( smExpireTime* )m_Packet;
-				if( !ThreadMode )
+				if( !TimerCount )
 				{
-					DWORD tID = 0;
-					CreateThread( NULL, NULL, CheckPremiuns, ( LPVOID )&PremiumItem, NULL, &tID );
-					ThreadMode = true;
+					SetTimer( NULL, NULL, 1000, CheckPremiums );
+					TimerCount = true;
 				}
-				else
-				{
-					CPremium* pPremium = new CPremium( );
-					pPremium->AddItem( &PremiumItem );
-					delete pPremium;
-				};
+				CPremium* pPremium = new CPremium( );
+				pPremium->AddItem( &PremiumItem );
+				delete pPremium;
 			}
 			return true;
 		case Code::AddSoloExp:
