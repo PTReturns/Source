@@ -63,5 +63,5 @@ struct smPremiumItem
 	DWORD Size;
 	DWORD Code;
 	DWORD ItemID;
-	DWORD Duration;
+	INT Duration;
 };
