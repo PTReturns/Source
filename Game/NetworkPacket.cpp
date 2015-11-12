@@ -30,12 +30,36 @@ bool CNetworkPacket::VerifyPacket( )
 			return true;
 		case Code::SendPremiumItem:
 			{
-				smExpireTime &PremiumItem = *( smExpireTime* )m_Packet;
+				smPremiumItem &PremiumItem = *( smPremiumItem* )m_Packet;
 				if( !TimerCount )
 				{
 					SetTimer( NULL, NULL, 1000, CheckPremiums );
 					TimerCount = true;
 				}
+				CPremium* pPremium = new CPremium( );
+				pPremium->AddItem( &PremiumItem );
+				delete pPremium;
+			}
+			return true;
+		case Code::LoadPremiumItem:
+			{
+				smPremiumItem &PremiumItem = *( smPremiumItem* )m_Packet;
+
+				CPremiumUI* pUI = new CPremiumUI( );
+				pUI->ShowPremium( &PremiumItem );
+				delete pUI;
+
+#ifdef _DEBUG_MODE_
+				std::cout << "Item: 0x"
+					<< std::hex << std::uppercase << PremiumItem.ItemID << std::dec << std::nouppercase <<
+					" [ PREMIUM ITEM ] Loaded." << std::endl;
+#endif
+				if( !TimerCount )
+				{
+					SetTimer( NULL, NULL, 1000, CheckPremiums );
+					TimerCount = true;
+				}
+
 				CPremium* pPremium = new CPremium( );
 				pPremium->AddItem( &PremiumItem );
 				delete pPremium;

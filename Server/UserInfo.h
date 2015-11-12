@@ -12,4 +12,5 @@ public:
 };
 
 extern std::shared_ptr<CUserInfo> pActivePlayers;
+extern std::vector<CUserData*> pUsers;
 #define USERS pActivePlayers

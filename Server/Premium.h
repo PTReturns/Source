@@ -26,10 +26,18 @@ class CPremium
 {
 public:
 	CPremium( smThrowItem2* PremiumItem, CUserData* User );
+	CPremium( smPremiumItem* PremiumItem, CUserData* User );
+	CPremium( CUserData* User );
 
+	void CheckLoadedPremium( );
+	void CheckRemovedPremium( );
+	void DeletePremium( );
 	void System( );
+	void SavePremium( );
+	void LoadPremium( );
 private:
 	CUserData* m_User;
-	smThrowItem2* m_Premium;
+	smThrowItem2* m_ThrowItem;
+	smPremiumItem* m_PremiumItem;
 };
 

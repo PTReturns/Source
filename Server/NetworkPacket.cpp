@@ -23,6 +23,14 @@ bool CNetworkPacket::VerifyPacket( )
 
 	switch( m_Packet->Code )
 	{
+		case Code::DeletePremiumItem:
+			{
+				smPremiumItem &PremiumItem = *( smPremiumItem* )m_Packet;
+				CPremium* pPremium = new CPremium( &PremiumItem, m_UserData );
+				pPremium->DeletePremium( );
+				delete pPremium;
+			}
+			return true;
 		case Code::Connection:
 			{
 				// TODO: Anti-Buum!
@@ -50,6 +58,11 @@ bool CNetworkPacket::VerifyPacket( )
 				CPremium* pPremium = new CPremium( &PremiumItem, m_UserData );
 				pPremium->System( );
 				delete pPremium;
+			}
+			break;
+		case Code::SaveGame:
+			{
+
 			}
 			break;
 	};

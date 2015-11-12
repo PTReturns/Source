@@ -52,6 +52,9 @@
     <Filter Include="Systems\Premiuns">
       <UniqueIdentifier>{ce38a4b5-7e1e-4f73-93a5-d198c517157a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems\Load User">
+      <UniqueIdentifier>{6697306f-d50e-4bbb-bf05-d71ab29d32c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -90,6 +93,9 @@
     </ClInclude>
     <ClInclude Include="Premium.h">
       <Filter>Systems\Premiuns</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadUser.h">
+      <Filter>Systems\Load User</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +138,9 @@
     </ClCompile>
     <ClCompile Include="Premium.cpp">
       <Filter>Systems\Premiuns</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadUser.cpp">
+      <Filter>Systems\Load User</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

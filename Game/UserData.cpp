@@ -40,3 +40,19 @@ void CUserData::SetNextLevelExp( int Exp ) const
 {
 	*( int* )( USER_DATA + 0x3A64 ) = Exp;
 }
+
+void CUserData::SendInt( void* Packet ) const
+{
+	DWORD Sock = *( DWORD* )0x03AD1F88;
+	if( !Sock ) Sock = *( DWORD* )0x03AD1F8C;
+
+	SendIntPacket( Sock, Packet, *( DWORD* )Packet, TRUE );
+}
+
+void CUserData::SendStr( void* Packet ) const
+{
+	DWORD Sock = *( DWORD* )0x03AD1F88;
+	if( !Sock ) Sock = *( DWORD* )0x03AD1F8C;
+
+	SendStrPacket( Sock, Packet, *( int* )Packet, TRUE );
+}

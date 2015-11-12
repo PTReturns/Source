@@ -53,15 +53,16 @@ struct smThrowItem2
 	DWORD Size;
 	DWORD Code;
 	DWORD Head;
-	DWORD ItemCode;
+	DWORD ItemID;
 	DWORD ItemCheckSum;
 	DWORD PremiumCheckSum;
 };
 
-struct smExpireTime
+struct smPremiumItem
 {
 	DWORD Size;
 	DWORD Code;
-	DWORD ItemCode;
-	DWORD TotalSeconds;
+	DWORD ItemID;
+	DWORD DurationTime;
+	DWORD ElapsedTime;
 };

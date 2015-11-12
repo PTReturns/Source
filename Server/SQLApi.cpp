@@ -60,7 +60,9 @@ bool CSQLApi::Select( SQLBuffer& Buffer, const char* Query, ... )
 	if( j )
 		return true;
 	else
+	{
 		return false;
+	};
 }
 
 bool CSQLApi::Execute( const char* Query, ... )

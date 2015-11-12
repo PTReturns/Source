@@ -64,7 +64,9 @@ public:
 	void AddTotalExp( int Exp );
 
 	// Premium
+	int m_PremiumCount;
 	int m_ExpBoost;
+	int m_LastSaveGameTime;
 
 private:
 	int m_PlayInfo;

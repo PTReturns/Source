@@ -81,6 +81,7 @@
     <ClInclude Include="FieldTable.h" />
     <ClInclude Include="ItemTable.h" />
     <ClInclude Include="LevelTable.h" />
+    <ClInclude Include="LoadUser.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="MonsterData.h" />
     <ClInclude Include="NetworkPacket.h" />
@@ -104,6 +105,7 @@
     <ClCompile Include="FieldTable.cpp" />
     <ClCompile Include="ItemTable.cpp" />
     <ClCompile Include="LevelTable.cpp" />
+    <ClCompile Include="LoadUser.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MonsterData.cpp" />
     <ClCompile Include="NetworkPacket.cpp" />

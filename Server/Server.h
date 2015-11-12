@@ -4,7 +4,7 @@
 
 /* VARIÁVEIS DO EXECUTÁVEL */
 #define PSTALE 0x08B67000
-#define CURRENT_TIME *( DWORD* )0x07AC9D6C
+#define CURRENT_TIME ( DWORD )( *( DWORD* )0x07AC9D30 / 1000 )
 
 // Total de itens no servidor.
 #define ITEM_QUANTITY 1689
