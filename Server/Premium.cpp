@@ -4,174 +4,158 @@
 
 #include "ItemTable.h"
 
+std::shared_ptr<CPremium> pPremium = std::make_shared<CPremium>( );
+int LastSaveTime = 0;
 
-CPremium::CPremium( smThrowItem2* PremiumItem, CUserData* User )
-{
-	m_ThrowItem = PremiumItem;
-	m_User = User;
-	m_PremiumItem = nullptr;
-}
-
-CPremium::CPremium( smPremiumItem* PremiumItem, CUserData* User )
-{
-	m_ThrowItem = nullptr;
-	m_User = User;
-	m_PremiumItem = PremiumItem;
-}
-
-CPremium::CPremium( CUserData* User )
+void CPremium::SetUser( CUserData* User )
 {
 	m_User = User;
-	m_ThrowItem = nullptr;
-	m_PremiumItem = nullptr;
 }
 
-void CPremium::System( )
+void CPremium::AddItem( smPremiumItem* Item )
 {
-	if( !m_ThrowItem ) return;
-
-	int CheckSum = m_ThrowItem->PremiumCheckSum ^ m_ThrowItem->ItemCheckSum ^ m_ThrowItem->Code;
-	if( ( m_ThrowItem->ItemID & 0xFFFF0000 ) >= 0x080B0000 && ( m_ThrowItem->ItemID & 0xFFFF0000 ) <= 0x080C0000 )
+	if( m_User && Item )
 	{
-		if( CheckSum == EXPUP_CHECKSUM )
+		Item->Size = sizeof( smPremiumItem );
+		Item->Code = Code::SendPremiumItem;
+
+		m_User->SendInt( Item );
+		UpdateCharEffects( Item );
+	};
+}
+
+void CPremium::AddItem( smThrowItem2* Item )
+{
+	if( m_User && Item )
+	{
+		int CheckSum = Item->PremiumCheckSum ^ Item->ItemCheckSum ^ Item->Code;
+		if( ( Item->ItemID & 0xFFFF0000 ) >= 0x080B0000 && ( Item->ItemID & 0xFFFF0000 ) <= 0x080C0000 )
 		{
-			switch( m_ThrowItem->ItemID )
-			{
-				case ItemCode::ExpUp1M:
-					{
-						if( SQL->Execute( "INSERT INTO ServerDB.dbo.Premiuns "
-							"VALUES( '%s', '%s', %d, %d, %d )", m_User->GetID( ), m_User->GetNick( ),
-							m_ThrowItem->ItemID, ( 1 * MINUTE ), NULL ) )
-						{
-							smPremiumItem PremiumItem = { 0 };
-							PremiumItem.Size = sizeof( smPremiumItem );
-							PremiumItem.Code = Code::SendPremiumItem;
-							PremiumItem.ItemID = m_ThrowItem->ItemID;
-							PremiumItem.DurationTime = ( 1 * MINUTE );
-							PremiumItem.ElapsedTime = 0;
-
-							m_User->SendInt( &PremiumItem );
-							m_User->m_ExpBoost += EXPUP_POTION_30;
-						};
-					}
-					break;
-			};
-		};
-		m_User->m_LastSaveGameTime = CURRENT_TIME;
-	};
-}
-
-void CPremium::CheckRemovedPremium( )
-{
-	if( !m_PremiumItem ) return;
-
-	m_User->m_PremiumCount--;
-
-	switch( m_PremiumItem->ItemID )
-	{
-		case ItemCode::ExpUp1M:
-			{
-				m_User->m_ExpBoost -= EXPUP_POTION_30;
-			}
-			break;
-	};
-}
-
-void CPremium::CheckLoadedPremium( )
-{
-	if( !m_PremiumItem ) return;
-
-	m_User->m_PremiumCount++;
-
-	switch( m_PremiumItem->ItemID )
-	{
-		case ItemCode::ExpUp1M:
-			{
-				m_User->m_ExpBoost += EXPUP_POTION_30;
-			}
-			break;
-	};
-}
-
-void CPremium::DeletePremium( )
-{
-	if( !m_PremiumItem ) return;
-
-	if( m_PremiumItem->ElapsedTime == m_PremiumItem->DurationTime )
-	{
-		SQLBuffer PremiumInfo;
-		if( SQL->Select( PremiumInfo, "SELECT * FROM ServerDB.dbo.Premiuns WHERE ID = '%s' AND Nick = '%s' AND ItemID = %d",
-			m_User->GetID( ), m_User->GetNick( ), m_PremiumItem->ItemID ) )
-		{
-			if( m_PremiumItem->ElapsedTime >= atoi( PremiumInfo[ 0 ][ 3 ].c_str( ) ) )
-			{
-				if( SQL->Execute( "DELETE FROM ServerDB.dbo.Premiuns WHERE ID = '%s' AND Nick = '%s' AND ItemID = %d",
-					m_User->GetID( ), m_User->GetNick( ), m_PremiumItem->ItemID ) )
-					CheckRemovedPremium( );
-			}
-			else
-			{
-#ifdef _DEBUG_MODE_
-				std::cout << m_User->GetNick( ) << ": Banned[ PREMIUM TIME HACK ]" << std::endl;
-#endif
-			};
-		};
-	};
-}
-
-void CPremium::SavePremium( )
-{
-	SQLBuffer PremiumTime;
-	if( m_User->m_PremiumCount && 
-		SQL->Select( PremiumTime, "SELECT * FROM ServerDB.dbo.Premiuns WHERE ID = '%s' and Nick = '%s'",
-		m_User->GetID( ), m_User->GetNick( ) ) )
-	{
-		for( unsigned int i = 0; i < PremiumTime.size( ); i++ )
-		{
-			int ID = atoi( PremiumTime[ i ][ 2 ].c_str( ) );
-			int Duration = atoi( PremiumTime[ i ][ 3 ].c_str( ) );
-			int Elapsed = atoi( PremiumTime[ i ][ 4 ].c_str( ) ) + 1;
-			if( Duration <= Elapsed )
-			{
-				smPremiumItem PremiumItem = { 0 };
-				PremiumItem.Size = sizeof( smPremiumItem );
-				PremiumItem.Code = Code::DeletePremiumItem;
-				PremiumItem.ItemID = ID;
-				PremiumItem.DurationTime = Duration;
-				PremiumItem.ElapsedTime = Elapsed;
-				m_PremiumItem = &PremiumItem;
-				DeletePremium( );
-			}
-			else
-			{
-				SQL->Execute( "UPDATE ServerDB.dbo.Premiuns SET ElapsedTime = %d WHERE ID = '%s' AND Nick = '%s' AND ItemID = %d",
-							  Elapsed, m_User->GetID( ), m_User->GetNick( ), ID );
-			};
-		};
-	};
-}
-
-void CPremium::LoadPremium( )
-{
-	SQLBuffer CharItems;
-	if( SQL->Select( CharItems, "SELECT * FROM ServerDB.dbo.Premiuns WHERE ID = '%s' AND Nick = '%s'",
-		m_User->GetID( ), m_User->GetNick( ) ) )
-	{
-		for( unsigned int i = 0; i < CharItems.size( ); i++ )
-		{
+			bool isPremium = true;
 			smPremiumItem PremiumItem = { 0 };
-			PremiumItem.Size = sizeof( PremiumItem );
-			PremiumItem.Code = Code::LoadPremiumItem;
-			PremiumItem.ItemID = atoi( CharItems[ i ][ 2 ].c_str( ) );
-			PremiumItem.DurationTime = atoi( CharItems[ i ][ 3 ].c_str( ) );
-			PremiumItem.ElapsedTime = atoi( CharItems[ i ][ 4 ].c_str( ) );
+			PremiumItem.Size = sizeof( smPremiumItem );
+			PremiumItem.Code = Code::SendPremiumItem;
 
-			m_User->SendInt( &PremiumItem );
+			if( CheckSum == POTION_EXPUP )
+			{
+				switch( Item->ItemID )
+				{
+					case BI | Item13:
+						{
+							PremiumItem.ItemID = BI | Item13;
+							PremiumItem.Duration = 1 * MINUTE;
+						}
+						break;
 
-			m_PremiumItem = &PremiumItem;
+					default:
+						isPremium = false;
+						break;
+				};
+			};
 
-			CheckLoadedPremium( );
+			if( isPremium )
+			{
+				m_User->SendInt( &PremiumItem );
+				UpdateCharEffects( &PremiumItem );
+				SQL->Execute( "INSERT INTO ServerDB.dbo.Premiuns "
+							  "VALUES( '%s', '%s', %d, %d )", m_User->GetID( ), m_User->GetNick( ),
+							  PremiumItem.ItemID, PremiumItem.Duration );
+			};
+
 		};
-		m_User->m_LastSaveGameTime = CURRENT_TIME;
+	};
+}
+
+void CPremium::SavePremiums( int ElapsedTime )
+{
+	EnterCriticalSection( &m_SaveSection );
+	LastSaveTime = CURRENT_TIME;
+
+	if( !m_User ) return;
+	if( !m_User->m_PremiumCount ) return;
+	SQLBuffer UserPremiums;
+	if( !SQL->Select( UserPremiums, "SELECT * FROM ServerDB.dbo.Premiuns WHERE ID = '%s' and Nick = '%s'",
+		m_User->GetID( ), m_User->GetNick( ) ) ) return;
+
+	smPremiumItem* PremiumItem = new smPremiumItem( );
+	for( unsigned int i = 0; i < UserPremiums.size( ); i++ )
+	{
+		PremiumItem->ItemID = atoi( UserPremiums[ i ][ 2 ].c_str( ) );
+		PremiumItem->Duration = atoi( UserPremiums[ i ][ 3 ].c_str( ) );
+		PremiumItem->Duration -= ElapsedTime;
+		if( PremiumItem->Duration <= 0 )
+		{
+			RemovePremium( PremiumItem );
+		}
+		else
+		{
+			SQL->Execute( "UPDATE ServerDB.dbo.Premiuns SET Duration = %d WHERE ID = '%s' AND Nick = '%s' AND ItemID = %d",
+						  PremiumItem->Duration, m_User->GetID( ), m_User->GetNick( ), PremiumItem->ItemID );
+		};
+	};
+	delete PremiumItem;
+
+	LeaveCriticalSection( &m_SaveSection );
+}
+
+void CPremium::LoadPremiums( )
+{
+	if( !m_User ) return;
+
+	SQLBuffer CharPremiuns;
+	if( SQL->Select( CharPremiuns, "SELECT * FROM ServerDB.dbo.Premiuns WHERE ID = '%s' AND Nick = '%s'",
+		m_User->GetID( ), m_User->GetNick( ) ) )
+	{
+		smPremiumItem* PremiumItem = new smPremiumItem( );
+		PremiumItem->Size = sizeof( smPremiumItem );
+		PremiumItem->Code = Code::LoadPremiumItem;
+		for( unsigned int i = 0; i < CharPremiuns.size( ); i++ )
+		{
+			PremiumItem->ItemID = atoi( CharPremiuns[ i ][ 2 ].c_str( ) );
+			PremiumItem->Duration = atoi( CharPremiuns[ i ][ 3 ].c_str( ) );
+			AddItem( PremiumItem );
+		};
+		delete PremiumItem;
+	};
+}
+
+void CPremium::RemovePremium( smPremiumItem* Item )
+{
+	if( !m_User || !Item ) return;
+
+	if( SQL->Execute( "DELETE FROM ServerDB.dbo.Premiuns WHERE ID = '%s' AND Nick = '%s' AND ItemID = %d",
+		m_User->GetID( ), m_User->GetNick( ), Item->ItemID ) )
+	{
+		UpdateCharEffects( Item );
+	};
+}
+
+void CPremium::UpdateCharEffects( smPremiumItem* Item )
+{
+	if( Item )
+	{
+		if( Item->Duration <= 0 )
+			m_User->m_PremiumCount--;
+		else
+			m_User->m_PremiumCount++;
+
+		switch( Item->ItemID )
+		{
+			case BI | Item13:
+				{
+					if( Item->Duration <= 0 )
+						m_User->m_ExpBoost -= EXP_BOOST_30;
+					else
+						m_User->m_ExpBoost += EXP_BOOST_30;
+				}
+				break;
+			default:
+				if( Item->Duration <= 0 )
+					m_User->m_PremiumCount++;
+				else
+					m_User->m_PremiumCount--;
+				break;
+		};
+
 	};
 }

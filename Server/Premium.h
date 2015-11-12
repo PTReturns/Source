@@ -2,10 +2,14 @@
 #include "UserData.h"
 
 //CONFIGURAÇÕES DO USUÁRIO
-#define EXPUP_POTION_30 30
+#define EXP_BOOST_10 10
+#define EXP_BOOST_20 20
+#define EXP_BOOST_30 30
+#define EXP_BOOST_40 40
+#define EXP_BOOST_50 50
 
 
-#define EXPUP_CHECKSUM 300
+#define POTION_EXPUP 300
 
 #define MINUTE	(          60 )
 #define HOUR	( MINUTE * 60 )
@@ -13,31 +17,25 @@
 #define WEEK	( DAY	 * 7  )
 #define MONTH	( WEEK	 * 30 )
 
-namespace ItemCode
-{
-	enum
-	{
-		ExpUp1M = 0x080B0D00,
-	};
-};
-
 
 class CPremium
 {
 public:
-	CPremium( smThrowItem2* PremiumItem, CUserData* User );
-	CPremium( smPremiumItem* PremiumItem, CUserData* User );
-	CPremium( CUserData* User );
+	CPremium( ) { m_User = 0; InitializeCriticalSection( &m_SaveSection ); };
+	~CPremium( ) { DeleteCriticalSection( &m_SaveSection ); };
 
-	void CheckLoadedPremium( );
-	void CheckRemovedPremium( );
-	void DeletePremium( );
-	void System( );
-	void SavePremium( );
-	void LoadPremium( );
+	void SetUser( CUserData* User );
+
+	void AddItem( smPremiumItem* Item );
+	void AddItem( smThrowItem2* Item );
+	void SavePremiums( int ElapsedTime = 1 * MINUTE );
+	void LoadPremiums( );
+	void RemovePremium( smPremiumItem* Item );
+	void UpdateCharEffects( smPremiumItem* Item );
 private:
 	CUserData* m_User;
-	smThrowItem2* m_ThrowItem;
-	smPremiumItem* m_PremiumItem;
+	CRITICAL_SECTION m_SaveSection;
 };
 
+extern std::shared_ptr<CPremium> pPremium;
+#define PREMIUM pPremium

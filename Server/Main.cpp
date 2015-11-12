@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Main.h"
 
-#include "SQLApi.h"
 #include "UserInfo.h"
 #include "Premium.h"
 
@@ -13,12 +12,9 @@ extern void Load_User( int PlayInfo );
 
 void __stdcall MainTimer( HWND hWnd, UINT Message, UINT_PTR ID, DWORD Time );
 
-CRITICAL_SECTION Section;
-
 CMain::CMain( )
 {
-	InitializeCriticalSection( &Section );
-	SetTimer( NULL, NULL, 2000, MainTimer );
+	SetTimer( NULL, NULL, 60000, MainTimer );
 }
 
 void CMain::Hook( )
@@ -32,15 +28,12 @@ void CMain::Hook( )
 
 void __stdcall MainTimer( HWND hWnd, UINT Message, UINT_PTR ID, DWORD Time )
 {
-	EnterCriticalSection( &Section );
 	for( auto &User : pUsers )
 	{
 		if( User && User->GetInfo( ) && User->m_PremiumCount )
 		{
-			CPremium* pPremium = new CPremium( User );
-			pPremium->SavePremium( );
-			delete pPremium;
+			PREMIUM->SetUser( User );
+			PREMIUM->SavePremiums( );
 		};
 	};
-	LeaveCriticalSection( &Section );
 }

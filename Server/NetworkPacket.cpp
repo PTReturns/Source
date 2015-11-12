@@ -2,6 +2,8 @@
 #include "NetworkPacket.h"
 #include "Premium.h"
 
+extern int LastSaveTime;
+
 CNetworkPacket::CNetworkPacket( const int PlayInfo, smPacket* Packet )
 {
 	m_UserData = USERS->GetData( PlayInfo );
@@ -23,12 +25,11 @@ bool CNetworkPacket::VerifyPacket( )
 
 	switch( m_Packet->Code )
 	{
-		case Code::DeletePremiumItem:
+		case Code::RemovePremiumItem:
 			{
 				smPremiumItem &PremiumItem = *( smPremiumItem* )m_Packet;
-				CPremium* pPremium = new CPremium( &PremiumItem, m_UserData );
-				pPremium->DeletePremium( );
-				delete pPremium;
+				PREMIUM->SetUser( m_UserData );
+				PREMIUM->RemovePremium( &PremiumItem );
 			}
 			return true;
 		case Code::Connection:
@@ -54,15 +55,15 @@ bool CNetworkPacket::VerifyPacket( )
 			break;
 		case Code::SaveThrowItem2:
 			{
-				smThrowItem2 &PremiumItem = *( smThrowItem2* )m_Packet;
-				CPremium* pPremium = new CPremium( &PremiumItem, m_UserData );
-				pPremium->System( );
-				delete pPremium;
+				smThrowItem2 &ThrowItem2 = *( smThrowItem2* )m_Packet;
+				PREMIUM->SetUser( m_UserData );
+				PREMIUM->AddItem( &ThrowItem2 );
 			}
 			break;
-		case Code::SaveGame:
+		case Code::ExitUser:
 			{
-
+				PREMIUM->SetUser( m_UserData );
+				PREMIUM->SavePremiums( CURRENT_TIME - LastSaveTime );
 			}
 			break;
 	};

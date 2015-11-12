@@ -17,9 +17,8 @@ void CLoadUser::LoadChar( )
 		m_User->GetID( ), m_User->GetNick( ) ) )
 		SendGift( );
 
-	CPremium* pPremium = new CPremium( m_User );
-	pPremium->LoadPremium( );
-	delete pPremium;
+	PREMIUM->SetUser( m_User );
+	PREMIUM->LoadPremiums( );
 
 	SendWelcome( );
 }
