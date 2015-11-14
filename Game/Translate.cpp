@@ -8,7 +8,7 @@ CTranslate::CTranslate( )
 {
 	m_Address = ( DWORD )VirtualAlloc( nullptr, 0x100000, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE );
 	m_SpaceCount = 0;
-	//SetTranslations( );
+	SetTranslations( );
 }
 
 void CTranslate::SetTranslations( )
@@ -16,7 +16,7 @@ void CTranslate::SetTranslations( )
 	//Login
 	Translate( 0x008368F0, "Priston Tale - Returns" );
 	Translate( 0x009F2A7C, "http://www.pstale.com.br" );
-	Translate( 0x009F2C88, "Penetrando no orifício do Ravel..." );
+	Translate( 0x009F2C88, "Conectando ao Servidor..." );
 	Translate( 0x009F2C8C, "Impossível conectar" );
 	Translate( 0x009F2C90, "Conta incorreta" );
 	Translate( 0x009F2C94, "Senha incorreta" );
@@ -212,8 +212,8 @@ void CTranslate::SetTranslations( )
 	Translate( 0x00639042, "/fala" );
 	Translate( 0x00639017, "Armazém salvo" );
 	Translate( 0x00638FEA, "/salvar_armazem" );
-	Translate( 0x00638FBF, "Informações do Grupo: %d" );
-	Translate( 0x00638F9A, "/informacoes_grupo" );
+	//Translate( 0x00638FBF, "Informações do Grupo: %d" );
+	//Translate( 0x00638F9A, "/informacoes_grupo" );
 	Translate( 0x00638F65, "Experiência Perdida: %d %c" );
 	Translate( 0x00638F56, "Experiência Ganha: %d %c" );
 	Translate( 0x00638F0D, "/experiencia_porcento" );
@@ -226,7 +226,7 @@ void CTranslate::SetTranslations( )
 	Translate( 0x0045DFC4, "/clan " );
 	Translate( 0x0041C848, "/clan %s" );
 	Translate( 0x0041C868, "/troca %s" );
-	Translate( 0x004173B4, "/grupo %s" );
+	//Translate( 0x004173B4, "/grupo %s" );
 	Translate( 0x00638E59, "/noticias" );
 	Translate( 0x00638CF8, "/liga_camera" );
 	Translate( 0x00638CD2, "/desliga_camera" );

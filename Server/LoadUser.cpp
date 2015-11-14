@@ -74,7 +74,6 @@ void CLoadUser::SendGift( )
 		m_User->PutItem( ITEMTABLE->GetID( "OS103" ) );
 		m_User->PutItem( ITEMTABLE->GetID( "OR103" ) );
 		m_User->PutItem( ITEMTABLE->GetID( "OR103" ) );
-		m_User->PutItem( ITEMTABLE->GetID( "OM103" ) );
 		m_User->PutItem( ITEMTABLE->GetID( "OA203" ) );
 		m_User->PutItem( ITEMTABLE->GetID( "DG103" ) );
 		m_User->PutItem( ITEMTABLE->GetID( "DB103" ) );
