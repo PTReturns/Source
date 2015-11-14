@@ -28,7 +28,7 @@ public:
 
 	void AddItem( smPremiumItem* Item );
 	void AddItem( smThrowItem2* Item );
-	void SavePremiums( int ElapsedTime = 1 * MINUTE );
+	void SavePremiums( int ElapsedTime = 1 );
 	void LoadPremiums( );
 	void RemovePremium( smPremiumItem* Item );
 	void UpdateCharEffects( smPremiumItem* Item );

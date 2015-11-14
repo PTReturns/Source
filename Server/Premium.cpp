@@ -5,7 +5,6 @@
 #include "ItemTable.h"
 
 std::shared_ptr<CPremium> pPremium = std::make_shared<CPremium>( );
-int LastSaveTime = 0;
 
 void CPremium::SetUser( CUserData* User )
 {
@@ -17,7 +16,10 @@ void CPremium::AddItem( smPremiumItem* Item )
 	if( m_User && Item )
 	{
 		Item->Size = sizeof( smPremiumItem );
-		Item->Code = Code::SendPremiumItem;
+
+#ifdef _DEBUG_MODE_
+		std::cout << "AddItem: [ " << Item->Duration << " ]." << std::endl;
+#endif
 
 		m_User->SendInt( Item );
 		UpdateCharEffects( Item );
@@ -68,8 +70,7 @@ void CPremium::AddItem( smThrowItem2* Item )
 
 void CPremium::SavePremiums( int ElapsedTime )
 {
-	EnterCriticalSection( &m_SaveSection );
-	LastSaveTime = CURRENT_TIME;
+	m_User->m_LastSaveTime = CURRENT_TIME;
 
 	if( !m_User ) return;
 	if( !m_User->m_PremiumCount ) return;
@@ -94,8 +95,6 @@ void CPremium::SavePremiums( int ElapsedTime )
 		};
 	};
 	delete PremiumItem;
-
-	LeaveCriticalSection( &m_SaveSection );
 }
 
 void CPremium::LoadPremiums( )
@@ -115,6 +114,7 @@ void CPremium::LoadPremiums( )
 			PremiumItem->Duration = atoi( CharPremiuns[ i ][ 3 ].c_str( ) );
 			AddItem( PremiumItem );
 		};
+		m_User->m_LastSaveTime = CURRENT_TIME;
 		delete PremiumItem;
 	};
 }
@@ -122,6 +122,10 @@ void CPremium::LoadPremiums( )
 void CPremium::RemovePremium( smPremiumItem* Item )
 {
 	if( !m_User || !Item ) return;
+
+#ifdef _DEBUG_MODE_
+	std::cout << "RemovePremium: [ " << Item->Duration << " ]." << std::endl;
+#endif
 
 	if( SQL->Execute( "DELETE FROM ServerDB.dbo.Premiuns WHERE ID = '%s' AND Nick = '%s' AND ItemID = %d",
 		m_User->GetID( ), m_User->GetNick( ), Item->ItemID ) )
@@ -134,6 +138,11 @@ void CPremium::UpdateCharEffects( smPremiumItem* Item )
 {
 	if( Item )
 	{
+
+#ifdef _DEBUG_MODE_
+		std::cout << "UpdateCharEffects: [ " << Item->Duration << " ]." << std::endl;
+#endif
+
 		if( Item->Duration <= 0 )
 			m_User->m_PremiumCount--;
 		else

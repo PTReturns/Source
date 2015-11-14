@@ -86,6 +86,11 @@ void CExpSystem::GetSoloExp( )
 	};
 	//
 
+	if( m_UserData->m_ExpBoost < 0 )
+#ifdef _DEBUG_MODE_
+		std::cout << "Exp [ WARNING, NEGATIVE BOOST ]" << std::endl;
+#endif
+
 	m_UserData->AddTotalExp( ( int )Experience.Exp );
 	Experience.OldChecks[ 0 ] = ( int )Experience.Exp;
 	Experience.OldChecks[ 1 ] = ( ( int )Experience.Exp * 3 + Experience.MonInfo * 13 ) * 2002;

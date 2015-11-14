@@ -12,9 +12,12 @@ extern void Load_User( int PlayInfo );
 
 void __stdcall MainTimer( HWND hWnd, UINT Message, UINT_PTR ID, DWORD Time );
 
+CRITICAL_SECTION SaveSection;
+
 CMain::CMain( )
 {
-	SetTimer( NULL, NULL, 60000, MainTimer );
+	InitializeCriticalSection( &SaveSection );
+	SetTimer( NULL, NULL, 1000, MainTimer );
 }
 
 void CMain::Hook( )
@@ -28,6 +31,7 @@ void CMain::Hook( )
 
 void __stdcall MainTimer( HWND hWnd, UINT Message, UINT_PTR ID, DWORD Time )
 {
+	EnterCriticalSection( &SaveSection );
 	for( auto &User : pUsers )
 	{
 		if( User && User->GetInfo( ) && User->m_PremiumCount )
@@ -36,4 +40,5 @@ void __stdcall MainTimer( HWND hWnd, UINT Message, UINT_PTR ID, DWORD Time )
 			PREMIUM->SavePremiums( );
 		};
 	};
+	LeaveCriticalSection( &SaveSection );
 }

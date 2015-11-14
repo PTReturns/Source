@@ -41,43 +41,43 @@ void CLoadUser::SendGift( )
 		switch( m_User->GetJobCode( ) )
 		{
 			case JOBCODE_MECHANICIAN:
-				m_User->PutItem( ITEMTABLE->GetID( "WC103" ) );
-				m_User->PutItem( ITEMTABLE->GetID( "DS103" ) );
+				m_User->PutItem( ITEMTABLE->GetID( "WC101" ) );
+				m_User->PutItem( ITEMTABLE->GetID( "DS101" ) );
 				break;
 			case JOBCODE_FIGHTER:
-				m_User->PutItem( ITEMTABLE->GetID( "WA103" ) );
+				m_User->PutItem( ITEMTABLE->GetID( "WA101" ) );
 				break;
 			case JOBCODE_PIKEMAN:
-				m_User->PutItem( ITEMTABLE->GetID( "WP103" ) );
+				m_User->PutItem( ITEMTABLE->GetID( "WP101" ) );
 				break;
 			case JOBCODE_ARCHER:
-				m_User->PutItem( ITEMTABLE->GetID( "WS103" ) );
+				m_User->PutItem( ITEMTABLE->GetID( "WS101" ) );
 				break;
 			case JOBCODE_ATALANTA:
-				m_User->PutItem( ITEMTABLE->GetID( "WT103" ) );
+				m_User->PutItem( ITEMTABLE->GetID( "WT101" ) );
 				break;
 			case JOBCODE_KNIGHT:
-				m_User->PutItem( ITEMTABLE->GetID( "WS203" ) );
+				m_User->PutItem( ITEMTABLE->GetID( "WS201" ) );
 				break;
 			case JOBCODE_MAGICIAN:
 			case JOBCODE_PRIESTESS:
-				m_User->PutItem( ITEMTABLE->GetID( "WM103" ) );
-				m_User->PutItem( ITEMTABLE->GetID( "DA204" ) );
+				m_User->PutItem( ITEMTABLE->GetID( "WM101" ) );
+				m_User->PutItem( ITEMTABLE->GetID( "DA202" ) );
 				break;
 		};
 
 		if( m_User->GetJobCode( ) <= JOBCODE_KNIGHT )
 		{
-			m_User->PutItem( ITEMTABLE->GetID( "DA104" ) );
+			m_User->PutItem( ITEMTABLE->GetID( "DA102" ) );
 		};
 
-		m_User->PutItem( ITEMTABLE->GetID( "OS103" ) );
-		m_User->PutItem( ITEMTABLE->GetID( "OR103" ) );
-		m_User->PutItem( ITEMTABLE->GetID( "OR103" ) );
-		m_User->PutItem( ITEMTABLE->GetID( "OM103" ) );
-		m_User->PutItem( ITEMTABLE->GetID( "OA203" ) );
-		m_User->PutItem( ITEMTABLE->GetID( "DG103" ) );
-		m_User->PutItem( ITEMTABLE->GetID( "DB103" ) );
+		m_User->PutItem( ITEMTABLE->GetID( "OS101" ) );
+		m_User->PutItem( ITEMTABLE->GetID( "OR101" ) );
+		m_User->PutItem( ITEMTABLE->GetID( "OR101" ) );
+		m_User->PutItem( ITEMTABLE->GetID( "OM101" ) );
+		m_User->PutItem( ITEMTABLE->GetID( "OA201" ) );
+		m_User->PutItem( ITEMTABLE->GetID( "DG101" ) );
+		m_User->PutItem( ITEMTABLE->GetID( "DB101" ) );
 	};
 }
 
