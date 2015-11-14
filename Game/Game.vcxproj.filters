@@ -40,6 +40,15 @@
     <Filter Include="Systems\Premiuns">
       <UniqueIdentifier>{7b52713b-5e4a-46e0-a676-f5b985a0224e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems\User Interface">
+      <UniqueIdentifier>{263cc7f9-f0d0-4813-ad36-595503ef17c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectX9">
+      <UniqueIdentifier>{15ac9097-5140-4be5-98b2-e27816ebea55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectX9\Sprite">
+      <UniqueIdentifier>{e214e13e-8d46-4f5c-bf7a-3f8ab4ca202b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -73,6 +82,12 @@
     <ClCompile Include="Premium.cpp">
       <Filter>Systems\Premiuns</Filter>
     </ClCompile>
+    <ClCompile Include="UserInterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DX9Sprite.cpp">
+      <Filter>DirectX9\Sprite</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -102,6 +117,12 @@
     </ClInclude>
     <ClInclude Include="Premium.h">
       <Filter>Systems\Premiuns</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DX9Sprite.h">
+      <Filter>DirectX9\Sprite</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -14,12 +14,6 @@ void CPremium::AddItem( smPremiumItem* PremiumItem )
 	memcpy_s( Premium, sizeof( smPremiumItem ), PremiumItem, sizeof( smPremiumItem ) );
 
 	PremiumItems.push_back( Premium );
-
-#ifdef _DEBUG_MODE_
-	std::cout << "Item: 0x"
-		<< std::hex << std::uppercase << Premium->ItemID << std::nouppercase << std::dec
-		<< " added on TimerCount." << std::endl;
-#endif
 }
 
 void CPremium::UpdateItems( )
@@ -29,11 +23,6 @@ void CPremium::UpdateItems( )
 		if( Item )
 		{
 			Item->Duration--;
-#ifdef _DEBUG_MODE_
-			std::cout << "Item: 0x"
-				<< std::hex << std::uppercase << Item->ItemID << std::nouppercase << std::dec
-				<< " [ " << Item->Duration << " ]." << std::endl;
-#endif
 		};
 	};
 }
@@ -47,15 +36,6 @@ void CPremium::CheckTimes( )
 		{
 			if( Item->Duration <= 0 )
 			{
-#ifdef _DEBUG_MODE_
-				std::cout << "Item: 0x"
-					<< std::hex << std::uppercase << Item->ItemID << std::nouppercase << std::dec
-					<< " expired." << std::endl;
-#endif
-				Item->Code = Code::RemovePremiumItem;
-
-				USER->SendInt( Item );
-
 				delete Item;
 				PremiumItems.erase( PremiumItems.begin( ) + i );
 			};
@@ -66,20 +46,6 @@ void CPremium::CheckTimes( )
 
 void __stdcall CheckPremiums( HWND hWnd, UINT Message, UINT_PTR ID, DWORD Time )
 {
-	pPremium->UpdateItems( );
-	pPremium->CheckTimes( );
+	PREMIUM->UpdateItems( );
+	PREMIUM->CheckTimes( );
 };
-
-void CPremiumUI::ShowPremium( smPremiumItem* Item )
-{
-	switch( Item->ItemID )
-	{
-		case 0x080B0D00:
-			{
-				SetType( ( int* )0x03604EF8, 9 );
-				ShowImg( ( int* )0x03604EF8, 2, Item->Duration,
-						 TRUE, "Ravelzando 30%", 30, 0, 0, 0, 0 );
-			}
-			break;
-	};
-}

@@ -66,7 +66,7 @@ public:
 	// Premium
 	int m_PremiumCount;
 	int m_ExpBoost;
-	int m_LastSaveGameTime;
+	int m_LastSaveTime;
 
 private:
 	int m_PlayInfo;
